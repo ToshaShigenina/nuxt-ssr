@@ -1,0 +1,3 @@
+<template>
+  <employees-table />
+</template>

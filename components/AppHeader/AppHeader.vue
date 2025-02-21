@@ -6,14 +6,12 @@ defineEmits([ 'update:modelValue' ]);
 const route = useRoute();
 const title = computed(() => {
   switch (route.name) {
-    case 'plan':
-      return 'Журнал';
     case 'settings':
       return 'Настройки';
-    case 'employees-management':
+    case 'management':
       return 'Сотрудники';
     default:
-      return 'Приложение';
+      return '';
   }
 });
 

@@ -39,7 +39,7 @@ watch(
             <v-list-item-title>Сотрудники</v-list-item-title>
           </v-list-item>
         </template>
-        <v-list-item title="Управление" to="/employees/management" />
+        <v-list-item title="Управление" to="/management" />
         <v-list-item title="Должности" />
         <v-list-item title="Расписание" />
       </v-list-group>

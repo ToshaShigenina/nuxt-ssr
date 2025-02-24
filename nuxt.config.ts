@@ -1,6 +1,7 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   ssr: false,
+
   app: {
     head: {
       meta: [
@@ -13,9 +14,11 @@ export default defineNuxtConfig({
     },
     baseURL: '/nuxt-ssr/',
   },
+
   build: {
     transpile: ['vuetify'],
   },
+
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -25,6 +28,7 @@ export default defineNuxtConfig({
     },
     '@pinia/nuxt',
   ],
+
   vite: {
     vue: {
       template: {
@@ -32,5 +36,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   devtools: { enabled: false },
+  compatibilityDate: '2025-02-24',
 })

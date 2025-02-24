@@ -13,7 +13,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <v-app>
+  <v-app class="theme">
     <v-layout>
       <app-header v-model="showSidebar">
         <app-menu />
@@ -31,8 +31,8 @@ onBeforeMount(() => {
   </v-app>
 </template>
 
-<style>
-.v-theme--light {
+<style scoped>
+.theme {
   --v-theme-background: 221, 220, 220;
 }
 </style>

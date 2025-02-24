@@ -10,7 +10,7 @@ const toggleModal = (show) => {
 
 <template>
 	<v-dialog width="auto" :model-value="modelValue" @update:model-value="toggleModal">
-		<v-banner width="680" class="rounded-lg">
+		<v-banner width="680" class="rounded-lg banner">
 			<p>Banner with two lines of text. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam sunt praesentium, perspiciatis... magni. Lorem ipsum dolor sit amet...</p>
 			<template v-slot:actions>
 				<v-btn class="ms-auto btn" variant="tonal" text="Ok" @click="toggleModal(false)" />
@@ -26,5 +26,10 @@ const toggleModal = (show) => {
 	--v-activated-opacity: 0;
 	background-color: rgba(66, 211, 146, .3);
 	color: rgba(0, 0, 0, .87);
+}
+
+.banner {
+	display: flex;
+	flex-direction: column;
 }
 </style>

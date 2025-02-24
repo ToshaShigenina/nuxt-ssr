@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"
 import type { IContactsList } from "./user"
+import { loadEmployeesData } from "~/server/api";
 
 export interface IEmployee {
 	id: number;
@@ -41,14 +42,15 @@ export const useEmployeeStore = defineStore('employee', () => {
 	}
 	const loadEmployees = async () => {
 		setLoading(false)
-		const data = await $fetch('/employee', {
+		/* const data = await $fetch('/employee', {
 			method: 'get',
 			query: {
 				page: pagination.page,
 				pageSize: pagination.pageSize,
 			},
 			lazy: true
-		})
+		}) */
+		const data = await loadEmployeesData(pagination.page, pagination.pageSize)
 		updateEmployees(data.items)
 		setTotalCount(data.pagination.totalCount)
 		setLoading(true)

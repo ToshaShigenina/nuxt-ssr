@@ -1,4 +1,9 @@
 import { defineStore } from "pinia"
+import {
+	loadUserData,
+	loadUserCompanyData,
+	loadUserContactsData
+} from "~/server/api";
 
 export type ContactType = 'phone' | 'email'
 
@@ -30,6 +35,8 @@ const CONTACTS_LABEL = {
 
 export const useUserStore = defineStore('user', () => {
 	const loading = ref(false)
+	const loadingContacts = ref(false)
+	const loadingCompany = ref(false)
 	const user = ref<IUser | null>(null)
 	const contactsList = ref<IContactsList[]>([])
 	const company = ref<ICompany | null>(null)
@@ -60,7 +67,7 @@ export const useUserStore = defineStore('user', () => {
 		if (user.value && user.value.avatar) {
 			return user.value.avatar
 		}
-		return '/img/avatar.png'
+		return '/nuxt-ssr/img/avatar.png'
 	})
 	const info = computed(() => {
 		if (user.value && user.value.info) {
@@ -89,6 +96,8 @@ export const useUserStore = defineStore('user', () => {
 	const userCompanyOther = computed(() => company.value?.other?.join(', ') ?? '')
 
 	const setLoading = (newLoading: boolean) => loading.value = newLoading
+	const setLoadingContacts = (newLoading: boolean) => loadingContacts.value = newLoading
+	const setLoadingCompany = (newLoading: boolean) => loadingCompany.value = newLoading
 	const updateUser = (newUser: IUser) => {
 		user.value = { ...newUser }
 	}
@@ -99,22 +108,31 @@ export const useUserStore = defineStore('user', () => {
 		company.value = { ...newCompany }
 	}
 	const loadUser = async () => {
-		const data = await $fetch('/user', { method: 'get' })
+		// const data = await $fetch('/user', { method: 'get' })
+		const data = await loadUserData()
 		updateUser(data)
 		setLoading(true)
 	}
 	const loadUserContacts = async () => {
-		const data = await $fetch('/user/contacts', { method: 'get' })
-		updateUserContacts(data.items)
+		// const data = await $fetch('/user/contacts', { method: 'get' })
+		const data = await loadUserContactsData()
+		updateUserContacts(data)
+		setLoadingContacts(true)
 	}
 	const loadUserCompany = async () => {
-		const data = await $fetch('/user/company', { method: 'get' })
+		// const data = await $fetch('/user/company', { method: 'get' })
+		const data = await loadUserCompanyData()
 		updateUserCompany(data)
+		setLoadingCompany(true)
 	}
 
 	return {
 		loading,
 		setLoading,
+		loadingContacts,
+		setLoadingContacts,
+		loadingCompany,
+		setLoadingCompany,
 		user,
 		fullName,
 		shortName,
